@@ -1,0 +1,26 @@
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+
+logging:
+  level: INFO
+  loggers:
+    io.dropwizard: DEBUG
+
+database:
+  driverClass: com.mysql.cj.jdbc.Driver
+  user: root
+  password:
+  url: jdbc:mysql://localhost:3306/test
+  minSize: 5
+  maxSize: 20
+  properties:
+    charSet: UTF-8
+    useSSL: false
+    serverTimezone: UTC
+
+apiKey: my-secret-api-key
