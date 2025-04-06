@@ -1,59 +1,47 @@
-Conference Service API
-This is a REST API built with Dropwizard to manage session submissions for a conference. The service allows speakers to submit, view, update, and delete conference sessions.
+# Conference Session Submission Microservice
 
-Features:
-Submit a session: Allow speakers to submit their sessions with details.
+## 🧩 Problem Statement
 
-Retrieve sessions: Get all or individual session details.
+This microservice is part of a SaaS platform for managing conference presentations. The goal is to build a RESTful API using Dropwizard that allows speakers to submit, retrieve, update, and delete session proposals for a conference. The application stores session data in a MySQL database and ensures secure, performant, and scalable handling of session data.
 
-Update a session: Update the details of a session.
+## 🔧 Approach and Architectural Decisions
 
-Delete a session: Remove a session from the system.
+### Tech Stack
+- **Framework**: [Dropwizard](https://www.dropwizard.io/en/latest/) (Java)
+- **Database**: MySQL (accessed using JDBI3)
+- **Authentication**: Basic API Key-based authentication
+- **Containerization**: Docker
+- **Testing**: JUnit and Mockito
 
-Technologies Used:
-Dropwizard (Java framework for building RESTful services)
+### Key Components
+- `SessionResource`: REST API endpoints
+- `SessionDAO`: JDBI3 DAO interface for database operations
+- `Session`: Domain model representing session data
+- `ApiKeyAuthFilter`: Implements API key authentication
+- `ConferenceApplication` & `ConferenceConfiguration`: Application bootstrap and configuration
+- Logging via SLF4J and Logback
 
-JDBI (Java Database Interface for interacting with MySQL)
+### Architecture Highlights
+- Layered architecture separating resource, service, and data layers
+- API key authentication implemented via Dropwizard’s auth filters
+- MySQL queries optimized with indexes and connection pooling (via HikariCP)
+- Docker used for packaging and environment consistency
+- Input validation at the DTO level using Hibernate Validator
 
-HikariCP (Connection pooling for optimized database performance)
+## 🚀 How to Run the Application
 
-MySQL (Database for storing session details)
+### Prerequisites
+- Java 17+
+- Maven 3.6+
+- Docker & Docker Compose (for DB and app)
+- MySQL running locally or in Docker
 
-Prerequisites:
-Before running the application, make sure the following are installed:
+### 1. Clone the Repo
+``bash
+git clone https://github.com/yourusername/conference-submission-service.git
+cd conference-submission-service
+``
 
-Java 11 or later
-
-Maven (for building the project)
-
-Docker (optional for containerization)
-
-MySQL (or any compatible database)
-
-Configuration
-The application configuration is stored in config.yml. You can adjust the configuration as needed for your environment.
-
-
-database: Configure MySQL connection settings.
-
-Running the Application
-1. Clone the repository
-   git clone https://github.com/yourusername/conference-service.git
-   cd conference-service
-
-2. Build the application
-   mvn clean package
-   This will create a JAR file in the target directory (e.g., conference-service-1.0-SNAPSHOT.jar).
-
-3. Start the application
-   You can run the application using the following command:
-
-java -jar target/conference-service-1.0-SNAPSHOT.jar server config.yml
-The application will start running on http://localhost:8080.
-
-Build the Docker image:
-
-docker build -t conference-service .
-Run the Docker container:
-
-docker run -d -p 8080:8080 --name conference-service conference-service
+### 2. Run the application
+  - mvn clean package
+  - java -jar target/conference-submission-service.jar server config.yml
