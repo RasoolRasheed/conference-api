@@ -37,10 +37,11 @@ This microservice is part of a SaaS platform for managing conference presentatio
 - MySQL running locally or in Docker
 
 ### 1. Clone the Repo
-```bash
+``bash
 git clone https://github.com/yourusername/conference-submission-service.git
 cd conference-submission-service
+``
 
 ### 2. Run the application
-mvn clean package
-java -jar target/conference-submission-service.jar server config.yml
+  - mvn clean package
+  - java -jar target/conference-submission-service.jar server config.yml
