@@ -1,10 +1,9 @@
 package com.assessment;
 
-//import com.assessment.auth.AuthenticationFilter;
 import com.assessment.auth.AuthenticationFilter;
+import com.assessment.config.ConferenceServiceConfiguration;
 import com.assessment.dao.SessionDAO;
 import com.assessment.resources.SessionResource;
-import com.assessment.resources.TestResource;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
@@ -37,7 +36,6 @@ public class ConferenceServiceApplication extends Application<ConferenceServiceC
 
         environment.jersey().register(new AuthenticationFilter(configuration.getApiKey()));
         environment.jersey().register(new SessionResource(sessionDAO));
-        environment.jersey().register(new TestResource());
 
         environment.jersey().getResourceConfig().getClasses()
                 .forEach(clazz -> System.out.println("Registered class: " + clazz.getName()));

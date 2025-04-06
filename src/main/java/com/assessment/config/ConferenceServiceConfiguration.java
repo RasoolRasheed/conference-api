@@ -1,4 +1,4 @@
-package com.assessment;
+package com.assessment.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.core.Configuration;
